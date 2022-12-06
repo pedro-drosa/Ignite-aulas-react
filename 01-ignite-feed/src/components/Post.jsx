@@ -1,31 +1,42 @@
 import { Comment } from './Comment';
 import { Avatar } from './Avatar';
+import {
+  publishedDateFormatted,
+  publishedDateRelativeToNow,
+  dateTime,
+} from '../lib/date-fns/formatPublishedDate';
 import styles from './Post.module.css';
 
-export function Post() {
+export function Post({ author, publishedAt, content }) {
   return (
     <article className={styles.post}>
       <header>
         <div className={styles.author}>
-          <Avatar src="https://github.com/pedro-drosa.png" />
+          <Avatar src={author.avatarUrl} />
           <div className={styles.authorInfo}>
-            <strong>Pedro Mascarenhas</strong>
-            <span>Web Developer</span>
+            <strong>{author.name}</strong>
+            <span>{author.role}</span>
           </div>
         </div>
-        <time title="28 de Novembro ás 08:30h" dateTime="2022-11-28 08:30:00">
-          Publicado há 1h
+        <time
+          title={publishedDateFormatted(publishedAt)}
+          dateTime={dateTime(publishedAt)}
+        >
+          {publishedDateRelativeToNow(publishedAt)}
         </time>
       </header>
       <div className={styles.content}>
-        <p>Fala galeraa 👋 </p>
-        <p>
-          Acabei de subir mais um projeto no meu portifa. É um projeto que fiz
-          no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀
-        </p>
-        <p>
-          👉 <a href="#">pedro.design/doctorcare</a>
-        </p>
+        {content.map((line) => {
+          if (line.type === 'paragraph') {
+            return <p>{line.content}</p>;
+          } else if (line.type === 'link') {
+            return (
+              <p>
+                <a>{line.content}</a>
+              </p>
+            );
+          }
+        })}
         <p>
           <a href="#">#novoprojeto </a>
           <a href="#">#nlw </a>
