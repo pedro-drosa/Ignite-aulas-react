@@ -1,4 +1,4 @@
 export interface IContent {
-  type: 'paragraph' | 'link';
+  type: string | 'paragraph' | 'link';
   content: string;
 }
