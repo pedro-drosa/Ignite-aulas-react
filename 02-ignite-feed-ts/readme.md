@@ -43,7 +43,7 @@ Você precisa ter as seguintes ferramentas instaladas em sua máquina:
 $ git clone https://github.com/pedro-drosa/Ignite-aulas-react.git
 
 # Navegue até o repositório
-$ cd 01-ignite-feed-js/
+$ cd 02-ignite-feed-ts/
 
 #instale as dependências
 $ npm install
